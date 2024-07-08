@@ -1,0 +1,138 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  background-color: #efefef;
+}
+
+.dtm-app {
+  padding: 60px 0;
+  margin: 0 auto;
+  height: 100vh;
+  background-color: #fff;
+  position: relative;
+  overflow: auto;
+}
+
+.dtm-app header,
+.dtm-app footer {
+  min-height: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  padding: 20px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.dtm-app header {
+  bottom: unset;
+  top: 0; 
+  padding: 10px 0;
+}
+
+.dtm-app h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.dtm-app label {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.dtm-app label span {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.dtm-app select,
+.dtm-app textarea,
+.dtm-app input {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.dtm-app textarea {
+  height: 100px;
+}
+
+.dtm-app modal {
+  margin-bottom: 15px;
+  position: fixed;
+  top: calc(50% - 200px);
+  left: calc(50% - 250px);
+  padding: 20px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 8px;
+  width: 500px;
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.dtm-app form {
+  margin-bottom: 15px;
+}
+
+.dtm-app button,
+.dtm-app form button {
+  background-color: #8c0bd7;
+  color: #fff;
+  padding: 12px 15px;
+  border: unset;
+  margin-top: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: auto;
+}
+
+.dtm-app form h3 {
+  margin-bottom: 11px;
+}
+
+.dtm-app ul,
+.dtm-app ul li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dtm-app ul li {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  background-color: #fff;
+  justify-content: space-between;
+}
+
+.dtm-app ul li h3 {
+  color: #8c0bd7;
+  margin-bottom: 10px;
+}
+
+.dtm-app ul li p {
+  color: #666666;
+  margin-bottom: 10px;
+}
+
+.dtm-app ul li button {
+  padding: 5px 10px;
+  font-size: 12px;
+}

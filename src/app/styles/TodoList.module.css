@@ -1,0 +1,44 @@
+.todoActions,
+.todoProperties {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.todoProperties label {
+  font-weight: bold;
+  margin: 0;
+}
+
+.todoProperties span {
+  border: 1px solid #efefef;
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+
+.todoList h3 {
+  margin-bottom: 10px;
+}
+
+.todoList input,
+.todoList select {
+  padding: 5px;
+}
+
+.checkButton {
+  background: rgb(22, 159, 7) !important;
+}
+
+.deleteButton {
+  background: rgb(194, 7, 7) !important;
+}
+
+@media (max-width: 550px) {
+  .todoProperties {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}

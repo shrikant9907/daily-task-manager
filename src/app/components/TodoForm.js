@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
-import taskStatuses from '../utils/constants';
-import styles from './TodoForm.module.css'; // Import CSS module for styling
+import React, { useState, useEffect } from 'react';
+import styles from '../styles/TodoForm.module.css';
 
-const TodoForm = ({ onSubmit }) => {
+const TodoForm = ({ onSubmit, editTodo, closeModal }) => {
   const [text, setText] = useState('');
-  const taskTypes = ['work', 'learning']; // Array of task types
-  const [type, setType] = useState(taskTypes[0]); // Default type (work)
-  const [priority, setPriority] = useState('medium'); // Default priority
-  const reminderOptions = [30, 60, 90, 120, 180];
-  const [reminder, setReminder] = useState(reminderOptions[0]); // Default reminder (30 minutes)
+  const [type, setType] = useState('work');
+  const [priority, setPriority] = useState('medium');
+  const [reminder, setReminder] = useState(30);
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('To Do'); // Default status
+  const [status, setStatus] = useState('To Do');
+
+  useEffect(() => {
+    if (editTodo) {
+      setText(editTodo.text);
+      setType(editTodo.type);
+      setPriority(editTodo.priority);
+      setReminder(editTodo.reminder);
+      setDescription(editTodo.description);
+      setStatus(editTodo.status);
+    }
+  }, [editTodo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!text.trim()) return; // Prevent empty task submission
+    if (!text.trim()) return;
 
     onSubmit({
-      id: Date.now(),
+      id: editTodo ? editTodo.id : Date.now(),
       text,
       type,
       priority,
@@ -25,12 +33,12 @@ const TodoForm = ({ onSubmit }) => {
       description,
       status,
     });
-    setText(''); // Reset form after submission
+    closeModal();
   };
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <h3>Add New Task</h3>
+      <h3>{editTodo ? 'Edit Task' : 'Add New Task'}</h3>
       <label htmlFor="text" className={styles.fullWidth}>
         <span>Task:</span>
         <input
@@ -49,11 +57,8 @@ const TodoForm = ({ onSubmit }) => {
             value={type}
             onChange={(e) => setType(e.target.value)}
           >
-            {taskTypes.map((option) => (
-              <option key={option} value={option}>
-                {option.charAt(0).toUpperCase() + option.slice(1)}
-              </option>
-            ))}
+            <option value="work">Work</option>
+            <option value="learning">Learning</option>
           </select>
         </label>
         <label htmlFor="priority">
@@ -75,7 +80,7 @@ const TodoForm = ({ onSubmit }) => {
             value={reminder}
             onChange={(e) => setReminder(parseInt(e.target.value))}
           >
-            {reminderOptions.map((option) => (
+            {[30, 60, 90, 120, 180].map((option) => (
               <option key={option} value={option}>
                 {option} minutes
               </option>
@@ -89,15 +94,13 @@ const TodoForm = ({ onSubmit }) => {
             value={status}
             onChange={(e) => setStatus(e.target.value)}
           >
-            {taskStatuses.map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
+            <option value="To Do">To Do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
           </select>
         </label>
       </div>
-            <label htmlFor="description" className={styles.fullWidth}>
+      <label htmlFor="description" className={styles.fullWidth}>
         <span>Description:</span>
         <textarea
           id="description"
@@ -105,7 +108,7 @@ const TodoForm = ({ onSubmit }) => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </label>
-      <button type="submit">Add Task</button>
+      <button type="submit">Save Task</button>
     </form>
   );
 };
