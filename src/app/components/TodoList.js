@@ -20,7 +20,7 @@ const TodoList = ({ todos, setTodos, openEditModal }) => {
       <h3>Task List</h3>
       <ul className={styles.todoItems}>
         {todos && todos.map((todo) => (
-          <li key={todo.id} className={`${styles.todoItem} ${styles[todo.status]}`}>
+          <li key={todo.id}>
             <div className={styles.todoDetails}>
               <h3>{todo.text}</h3>
               {todo.description && <p><span>{todo.description}</span></p>}
@@ -37,7 +37,7 @@ const TodoList = ({ todos, setTodos, openEditModal }) => {
               <button className={styles.checkButton} onClick={() => handleComplete(todo.id)}>
                 {todo.status === "Completed" ? <PiArrowCounterClockwise /> : <PiCheck />}
               </button>
-              <button className={styles.editButton} onClick={() => openEditModal(todo.id)}><PiPencil /></button>
+              <button className={styles.editButton} onClick={() => openEditModal(todo)}><PiPencil /></button>
               <button className={styles.deleteButton} onClick={() => handleDelete(todo.id)}><PiX /></button>
             </div>
           </li>

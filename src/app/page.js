@@ -14,20 +14,28 @@ const Home = () => {
   const [todos, setTodos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editTodo, setEditTodo] = useState(null);
-  const [filter, setFilter] = useState({ type: '', priority: '', status: 'To Do' });
+  const [filter, setFilter] = useState({ type: '', priority: '', status: '' });
 
   useEffect(() => {
     const storedTodos = getTodosFromStorage();
     setTodos(storedTodos);
   }, []);
 
-  const handleAddTodo = (newTodo) => {
-    const updatedTodos = [...todos, newTodo];
-    setTodos(updatedTodos);
-    setIsModalOpen(false)
-    setTodosToStorage(updatedTodos);  
+  const handleAddEditTodo = (todo) => {
+    if (editTodo) {
+      const updatedTodos = todos.map((task) => (task.id === todo.id ? todo : task));
+      setTodos(updatedTodos);
+      setTodos(updatedTodos);
+      setIsModalOpen(false)
+      setTodosToStorage(updatedTodos);    
+    } else {
+      const updatedTodos = [...todos, todo];
+      setTodos(updatedTodos);
+      setIsModalOpen(false)
+      setTodosToStorage(updatedTodos);    
+    }
   };
-
+ 
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -35,7 +43,7 @@ const Home = () => {
   const resetTodoList = () => {
     setTodos([]);
     setTodosToStorage([])
-    setFilter({ type: '', priority: '', status: 'To Do' })
+    setFilter({ type: '', priority: '', status: '' })
     setEditTodo(null)
   };
 
@@ -55,7 +63,7 @@ const Home = () => {
   return (
     <main className={styles.main}>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <TodoForm onSubmit={handleAddTodo} editTodo={editTodo} closeModal={closeModal} />
+        <TodoForm onSubmit={handleAddEditTodo} editTodo={editTodo} closeModal={closeModal} />
       </Modal>
       <TodoFilter filter={filter} setFilter={setFilter} />
       <div className={styles.content}>
